@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS retail_pipeline;
 USE retail_pipeline;
 
--- Raw table
+-- Sales table
 CREATE TABLE raw_sales (
     order_id VARCHAR(50),
     order_date VARCHAR(50),
@@ -23,4 +23,16 @@ CREATE TABLE raw_sales (
     quantity VARCHAR(50),
     discount VARCHAR(50),
     profit VARCHAR(50)
+);
+
+-- people table
+CREATE TABLE people (
+    person VARCHAR(100),
+    region VARCHAR(50)
+);
+
+-- returns table
+CREATE TABLE returns_data (
+    returned VARCHAR(10),
+    order_id VARCHAR(50)
 );

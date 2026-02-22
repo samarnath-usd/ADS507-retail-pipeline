@@ -13,13 +13,15 @@ logging.info("Pipeline started")
 
 # ---------------- LOAD CSV ----------------
 df = pd.read_csv("data/sales_data.csv", encoding="latin1")
+people_df = pd.read_csv("data/people_data.csv")
+returns_df = pd.read_csv("data/returns_data.csv")
 logging.info("CSV loaded successfully")
 
 # ---------------- DB CONNECTION ----------------
 conn = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="your_password",
+    password="root123",
     database="retail_pipeline"
 )
 
@@ -30,6 +32,19 @@ logging.info("Connected to MySQL")
 cursor.executemany("""
 INSERT INTO raw_sales VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
 """, df.values.tolist())
+
+# Insert into people
+cursor.executemany("""
+INSERT INTO people VALUES (%s, %s)
+""", people_df.values.tolist())
+
+# Insert into returns
+cursor.executemany("""
+INSERT INTO returns_data VALUES (%s, %s)
+""", returns_df.values.tolist())
+
+conn.commit()
+
 
 conn.commit()
 logging.info("Data inserted into raw_sales")
