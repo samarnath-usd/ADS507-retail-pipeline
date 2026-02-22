@@ -19,7 +19,7 @@ logging.info("CSV loaded successfully")
 conn = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="root123",
+    password="your_password",
     database="retail_pipeline"
 )
 
